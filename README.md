@@ -4,7 +4,7 @@
 
 # Quick setup
 
-The following instructions will allow you to compile and run an icarus verilog model of the core within the Cocotb testbench (sim/test_core.py).
+The following instructions will allow you to compile and run an icarus verilog model of the core within the Cocotb testbench `sim/test_core.py`.
 
 1. Checkout the repository
 ```sh
