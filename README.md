@@ -40,7 +40,7 @@ pip install cocotb
 Simulating the core is done by using cocotb based testbench `sim/test_core.py`.
 
 1. Compile your program using Makefile `software/Makefile.gcc.in`.
-* The skeleton program is included in `software/test`.
+    * The skeleton program is included in `software/test`.
 2. Run cocotb testbench model in `sim/test_core.py`.
 
 Here is how you can run the `software/test/test.c` C program with the cocotb testbench: 
