@@ -1,0 +1,102 @@
+
+test.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	00000013          	nop
+   4:	00000093          	li	x1,0
+   8:	00000113          	li	x2,0
+   c:	00000193          	li	x3,0
+  10:	00000213          	li	x4,0
+  14:	00000293          	li	x5,0
+  18:	00000313          	li	x6,0
+  1c:	00000393          	li	x7,0
+  20:	00000413          	li	x8,0
+  24:	00000493          	li	x9,0
+  28:	00000513          	li	x10,0
+  2c:	00000593          	li	x11,0
+  30:	00000613          	li	x12,0
+  34:	00000693          	li	x13,0
+  38:	00000713          	li	x14,0
+  3c:	00000793          	li	x15,0
+  40:	00000813          	li	x16,0
+  44:	00000893          	li	x17,0
+  48:	00000913          	li	x18,0
+  4c:	00000993          	li	x19,0
+  50:	00000a13          	li	x20,0
+  54:	00000a93          	li	x21,0
+  58:	00000b13          	li	x22,0
+  5c:	00000b93          	li	x23,0
+  60:	00000c13          	li	x24,0
+  64:	00000c93          	li	x25,0
+  68:	00000d13          	li	x26,0
+  6c:	00000d93          	li	x27,0
+  70:	00000e13          	li	x28,0
+  74:	00000e93          	li	x29,0
+  78:	00000f13          	li	x30,0
+  7c:	00000f93          	li	x31,0
+  80:	00001137          	lui	x2,0x1
+  84:	ffc10113          	add	x2,x2,-4 # ffc <main+0xf70>
+  88:	004000ef          	jal	8c <main>
+
+0000008c <main>:
+  8c:	fe010113          	add	x2,x2,-32
+  90:	00812e23          	sw	x8,28(x2)
+  94:	02010413          	add	x8,x2,32
+  98:	fe042423          	sw	x0,-24(x8)
+  9c:	00100793          	li	x15,1
+  a0:	fef42623          	sw	x15,-20(x8)
+  a4:	0300006f          	j	d4 <main+0x48>
+  a8:	fec42783          	lw	x15,-20(x8)
+  ac:	00179693          	sll	x13,x15,0x1
+  b0:	fec42783          	lw	x15,-20(x8)
+  b4:	00279793          	sll	x15,x15,0x2
+  b8:	fe842703          	lw	x14,-24(x8)
+  bc:	00f707b3          	add	x15,x14,x15
+  c0:	00068713          	mv	x14,x13
+  c4:	00e7a023          	sw	x14,0(x15)
+  c8:	fec42783          	lw	x15,-20(x8)
+  cc:	00178793          	add	x15,x15,1
+  d0:	fef42623          	sw	x15,-20(x8)
+  d4:	fec42703          	lw	x14,-20(x8)
+  d8:	0ff00793          	li	x15,255
+  dc:	fce7d6e3          	bge	x15,x14,a8 <main+0x1c>
+  e0:	00000793          	li	x15,0
+  e4:	00078513          	mv	x10,x15
+  e8:	01c12403          	lw	x8,28(x2)
+  ec:	02010113          	add	x2,x2,32
+  f0:	00008067          	ret
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347          	.insn	4, 0x3a434347
+   4:	2820                	.insn	2, 0x2820
+   6:	39386367          	.insn	4, 0x39386367
+   a:	6431                	.insn	2, 0x6431
+   c:	6438                	.insn	2, 0x6438
+   e:	65333263          	.insn	4, 0x65333263
+  12:	2029                	.insn	2, 0x2029
+  14:	3331                	.insn	2, 0x3331
+  16:	322e                	.insn	2, 0x322e
+  18:	302e                	.insn	2, 0x302e
+	...
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1b41                	.insn	2, 0x1b41
+   2:	0000                	.insn	2, 0x
+   4:	7200                	.insn	2, 0x7200
+   6:	7369                	.insn	2, 0x7369
+   8:	01007663          	bgeu	x0,x16,14 <_start+0x14>
+   c:	0011                	.insn	2, 0x0011
+   e:	0000                	.insn	2, 0x
+  10:	1004                	.insn	2, 0x1004
+  12:	7205                	.insn	2, 0x7205
+  14:	3376                	.insn	2, 0x3376
+  16:	6932                	.insn	2, 0x6932
+  18:	7032                	.insn	2, 0x7032
+  1a:	0031                	.insn	2, 0x0031
