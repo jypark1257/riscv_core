@@ -5,7 +5,6 @@
 .globl _start;
 _start:    
     #initialize base registers to zero
-    li x0, 0
     li x1, 0
     li x2, 0
     li x3, 0
