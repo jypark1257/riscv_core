@@ -9,7 +9,6 @@ The following instructions will allow you to compile and run an icarus verilog m
 1. Checkout the repository
 ```sh
 git clone https://github.com/jypark1257/riscv_core.git
-cd riscv_core
 ```
 
 2. Install the GCC Toolchain [riscv-gnu-toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain)
