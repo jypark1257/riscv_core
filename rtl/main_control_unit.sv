@@ -18,7 +18,7 @@ module main_control_unit (
     localparam OPCODE_JAL = 7'b11_01111;
     localparam OPCODE_AUIPC = 7'b00_101_11;
     localparam OPCODE_LUI = 7'b01_101_11;
-    localparam OPCODE_E = 7'b11_100_11;         // ECALL, EBREAK
+    localparam OPCODE_SYSTEM = 7'b11_100_11;         // ECALL, EBREAK
     localparam OPCODE_CUSTOM_0 = 7'b00_010_11;
     localparam OPCODE_CUSTON_1 = 7'b01_010_11;
     localparam OPCODE_CUSTON_2 = 7'b10_110_11;  // custom / rv128
