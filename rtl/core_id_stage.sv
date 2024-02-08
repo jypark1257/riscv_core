@@ -19,6 +19,8 @@ module core_id_stage #(
     output  logic   [1:0]       o_mem_to_reg,
     output  logic   [1:0]       o_d_size,
     output  logic               o_d_unsigned,
+    output  logic               o_csr_write,
+    output  logic               o_csr_read,
     output  logic   [XLEN-1:0]  o_imm,
     output  logic   [XLEN-1:0]  o_rs1_dout,
     output  logic   [XLEN-1:0]  o_rs2_dout
@@ -35,13 +37,17 @@ module core_id_stage #(
     // Main control unit
     main_control_unit ctrl_u (
         .i_opcode       (o_opcode),
+        .i_rd           (o_rd),
         .i_funct3       (o_funct3),
+        .i_rs1          (o_rs1),
         .o_mem_read     (o_mem_read),
         .o_mem_write    (o_mem_write),
         .o_reg_write    (o_reg_write),
         .o_mem_to_reg   (o_mem_to_reg),
         .o_d_size       (o_d_size),
-        .o_d_unsigned   (o_d_unsigned)
+        .o_d_unsigned   (o_d_unsigned),
+        .o_csr_write    (o_csr_write),
+        .o_csr_read     (o_csr_read)
     );
 
     // Immrdiate generator

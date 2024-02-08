@@ -20,6 +20,8 @@ typedef struct packed {
     logic   [1:0]   mem_to_reg;
     logic   [1:0]   d_size;
     logic           d_unsigned;
+    logic           csr_write;
+    logic           csr_read;
     logic   [31:0]  rs1_dout;
     logic   [31:0]  rs2_dout;
 } pipe_id_ex;
@@ -82,6 +84,8 @@ module core #(
     logic [1:0] mem_to_reg;
     logic [1:0] d_size;
     logic d_unsigned;
+    logic csr_write;
+    logic csr_read;
 
     logic [XLEN-1:0] imm;
 
@@ -156,6 +160,8 @@ module core #(
         .o_mem_to_reg   (mem_to_reg),
         .o_d_size       (d_size),
         .o_d_unsigned   (d_unsigned),
+        .o_csr_write    (csr_write),
+        .o_csr_read     (csr_read),
         .o_rs1_dout     (rs1_dout),
         .o_rs2_dout     (rs2_dout)
     );
@@ -185,6 +191,8 @@ module core #(
                 ex.mem_to_reg <= mem_to_reg;
                 ex.d_size <= d_size;
                 ex.d_unsigned <= d_unsigned;
+                ex.csr_write <= csr_write;
+                ex.csr_read <= csr_read;
                 ex.rs1_dout <= rs1_dout;
                 ex.rs2_dout <= rs2_dout;
             end

@@ -1,12 +1,19 @@
 module main_control_unit (
     input           [6:0]   i_opcode,
+    input           [4:0]   i_rd,
     input           [2:0]   i_funct3,
-    output  logic           o_mem_read,
-    output  logic           o_mem_write,
+    input           [4:0]   i_rs1,
+    // Regiser File control 
     output  logic           o_reg_write,
-    output  logic   [1:0]   o_mem_to_reg,
+    // DMEM Read/Write Control
+    output  logic           o_mem_read,
     output  logic   [1:0]   o_d_size,
-    output  logic           o_d_unsigned
+    output  logic           o_d_unsigned,
+    output  logic   [1:0]   o_mem_to_reg,
+    output  logic           o_mem_write,
+    // CSR Eead/Write Control 
+    output  logic           o_csr_write,
+    output  logic           o_csr_read
 );
 
     // OPCODES 
@@ -18,7 +25,7 @@ module main_control_unit (
     localparam OPCODE_JAL = 7'b11_01111;
     localparam OPCODE_AUIPC = 7'b00_101_11;
     localparam OPCODE_LUI = 7'b01_101_11;
-    localparam OPCODE_SYSTEM = 7'b11_100_11;         // ECALL, EBREAK
+    localparam OPCODE_SYSTEM = 7'b11_100_11;    // CSRXX, ECALL (NOT IMPLEMENTED), EBREAK (NOT IMPLEMENTED)
     localparam OPCODE_CUSTOM_0 = 7'b00_010_11;
     localparam OPCODE_CUSTON_1 = 7'b01_010_11;
     localparam OPCODE_CUSTON_2 = 7'b10_110_11;  // custom / rv128
@@ -32,6 +39,14 @@ module main_control_unit (
     // UNSIGNED LOAD FUNCT3
     localparam FUNCT3_BYTE_U = 3'b100;
     localparam FUNCT3_HALF_U = 3'b101;
+
+    // CSR related FUNCT3
+    localparam FUNCT3_CSRRW = 3'b001;
+    localparam FUNCT3_CSRRS = 3'b010;
+    localparam FUNCT3_CSRRC = 3'b011;
+    localparam FUNCT3_CSRRWI = 3'b101;
+    localparam FUNCT3_CSRRSI = 3'b110;
+    localparam FUNCT3_CSRRCI = 3'b111;
 
     // SIZES
     localparam SIZE_HALF = 2'b01;
@@ -50,6 +65,8 @@ module main_control_unit (
         o_d_size = '0;
         o_d_unsigned = '0;
         o_mem_to_reg = '0;
+        o_csr_write = '0;
+        o_csr_read = '0;
 
         case (i_opcode)
             OPCODE_R: begin
@@ -121,6 +138,62 @@ module main_control_unit (
                 o_reg_write = 1'b1;
                 o_mem_to_reg = SRC_IMM;
             end
+            OPCODE_SYSTEM: begin
+                case (i_funct3)
+                    FUNCT3_CSRRW: begin
+                        o_csr_write = 1'b1;
+                        if (i_rd != '0) begin
+                            o_csr_read = 1'b1;
+                        end else begin
+                            o_csr_read = 1'b0;
+                        end
+                    end
+                    FUNCT3_CSRRS: begin
+                        o_csr_read = 1'b1;
+                        if (i_rs1 != '0) begin
+                            o_csr_write = 1'b1;
+                        end else begin
+                            o_csr_write = 1'b0;
+                        end
+                    end 
+                    FUNCT3_CSRRC: begin
+                        o_csr_read = 1'b1;
+                        if (i_rs1 != '0) begin
+                            o_csr_write = 1'b1;
+                        end else begin
+                            o_csr_write = 1'b0;
+                        end
+                    end
+                    FUNCT3_CSRRWI: begin
+                        o_csr_write = 1'b1;
+                        if (i_rd != '0) begin
+                            o_csr_read = 1'b1;
+                        end else begin
+                            o_csr_read = 1'b0;
+                        end
+                    end
+                    FUNCT3_CSRRSI: begin
+                        o_csr_read = 1'b1;
+                        if (i_rs1 != '0) begin
+                            o_csr_write = 1'b1;
+                        end else begin
+                            o_csr_write = 1'b0;
+                        end
+                    end 
+                    FUNCT3_CSRRCI: begin
+                        o_csr_read = 1'b1;
+                        if (i_rs1 != '0) begin
+                            o_csr_write = 1'b1;
+                        end else begin
+                            o_csr_write = 1'b0;
+                        end
+                    end 
+                    default: begin
+                        o_csr_read = '0;
+                        o_csr_write = '0;
+                    end
+                endcase
+            end
         //  CUSTOM_INSTRUCTION: begin
         //
         //  end
@@ -131,6 +204,8 @@ module main_control_unit (
                 o_d_size = '0;
                 o_d_unsigned = '0;
                 o_mem_to_reg = '0;
+                o_csr_read = '0;
+                o_csr_write = '0;
             end
         endcase
     end
