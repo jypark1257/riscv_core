@@ -4,13 +4,13 @@ module dp_ram #(
 ) (
     input                                   i_clk,
 
-    input           [MEM_ADDR_WIDTH-1:0]   i_addr_a,
+    input           [MEM_ADDR_WIDTH-1:0]    i_addr_a,
     input                                   i_we_a,
     input           [1:0]                   i_size_a,
     input           [31:0]                  i_din_a,
     output  logic   [31:0]                  o_dout_a,
 
-    input           [MEM_ADDR_WIDTH-1:0]   i_addr_b,
+    input           [MEM_ADDR_WIDTH-1:0]    i_addr_b,
     input                                   i_we_b,
     input           [1:0]                   i_size_b,
     input           [31:0]                  i_din_b,
@@ -21,7 +21,7 @@ module dp_ram #(
     localparam SIZE_HALF_WORD   = 2'b01;
 
     initial begin
-        $readmemh("/home/pjy-wsl/rv32i_mi/rtl/mem.hex", temp_mem);
+        $readmemh("/home/pjy-wsl/riscv_core/rtl/mem.hex", temp_mem);
         for(int i = 0; i < (MEM_DEPTH>>2); i=i+1) begin 
             {mem[(i*4)+3], mem[(i*4)+2], mem[(i*4)+1], mem[(i*4)]} = temp_mem[i];
         end

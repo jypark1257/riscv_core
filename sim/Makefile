@@ -4,6 +4,10 @@
 TOPLEVEL_LANG ?= verilog
 VERILOG_SOURCES += $(shell pwd)/../rtl/core_top.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/core.sv
+VERILOG_SOURCES += $(shell pwd)/../rtl/core_if_stage.sv
+VERILOG_SOURCES += $(shell pwd)/../rtl/core_id_stage.sv
+VERILOG_SOURCES += $(shell pwd)/../rtl/core_ex_stage.sv
+VERILOG_SOURCES += $(shell pwd)/../rtl/core_wb_stage.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/ram.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/dp_ram.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/program_counter.sv

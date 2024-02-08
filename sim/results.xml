@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1707106223" />
-    <testcase name="core_bench" classname="test_core" file="/home/pjy-wsl/rv32i_mi/core_sim/test_core.py" lineno="19" time="0.11159491539001465" sim_time_ns="9995.001" ratio_time="89565.02153407554" />
+    <property name="random_seed" value="1707367361" />
+    <testcase name="core_bench" classname="test_core" file="/home/pjy-wsl/riscv_core/sim/test_core.py" lineno="19" time="0.12624025344848633" sim_time_ns="9995.001" ratio_time="79174.43705132109" />
   </testsuite>
 </testsuites>
