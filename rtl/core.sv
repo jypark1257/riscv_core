@@ -17,11 +17,12 @@ typedef struct packed {
     logic           mem_read;
     logic           mem_write;
     logic           reg_write;
-    logic   [1:0]   mem_to_reg;
+    logic   [2:0]   mem_to_reg;
     logic   [1:0]   d_size;
     logic           d_unsigned;
+    logic   [1:0]   csr_op;
+    logic           csr_imm;
     logic           csr_write;
-    logic           csr_read;
     logic   [31:0]  rs1_dout;
     logic   [31:0]  rs2_dout;
 } pipe_id_ex;
@@ -32,8 +33,9 @@ typedef struct packed {
     logic   [4:0]   rd;
     logic   [31:0]  imm;
     logic   [31:0]  alu_result;
+    logic   [31:0]  csr_data;
     logic           reg_write;
-    logic   [1:0]   mem_to_reg;
+    logic   [2:0]   mem_to_reg;
     logic   [1:0]   d_size;
     logic           d_unsigned;
     logic   [31:0]  rd_din;
@@ -81,11 +83,16 @@ module core #(
     logic mem_read;
     logic mem_write;
     logic reg_write;
-    logic [1:0] mem_to_reg;
+    logic [2:0] mem_to_reg;
     logic [1:0] d_size;
     logic d_unsigned;
+    logic [1:0] csr_op;
+    logic csr_imm;
     logic csr_write;
-    logic csr_read;
+
+    logic [XLEN-1:0] forward_in2;
+    logic [XLEN-1:0] alu_result;
+    logic [XLEN-1:0] csr_data;
 
     logic [XLEN-1:0] imm;
 
@@ -160,8 +167,9 @@ module core #(
         .o_mem_to_reg   (mem_to_reg),
         .o_d_size       (d_size),
         .o_d_unsigned   (d_unsigned),
+        .o_csr_op       (csr_op),
+        .o_csr_imm      (csr_imm),
         .o_csr_write    (csr_write),
-        .o_csr_read     (csr_read),
         .o_rs1_dout     (rs1_dout),
         .o_rs2_dout     (rs2_dout)
     );
@@ -191,8 +199,9 @@ module core #(
                 ex.mem_to_reg <= mem_to_reg;
                 ex.d_size <= d_size;
                 ex.d_unsigned <= d_unsigned;
+                ex.csr_op <= csr_op;
+                ex.csr_imm <= csr_imm;
                 ex.csr_write <= csr_write;
-                ex.csr_read <= csr_read;
                 ex.rs1_dout <= rs1_dout;
                 ex.rs2_dout <= rs2_dout;
             end
@@ -201,13 +210,11 @@ module core #(
 
     // --------------------------------------------------------
 
-
-    logic [XLEN-1:0] forward_in2;
-    logic [XLEN-1:0] alu_result;
-
     core_ex_stage #(
         .XLEN(32)
     ) core_EX (
+        .i_clk          (i_clk),
+        .i_rst_n        (i_rst_n),
         .i_pc           (ex.pc),
         .i_opcode       (ex.opcode),
         .i_rd           (ex.rd),
@@ -219,9 +226,13 @@ module core #(
         .i_rs2_dout     (ex.rs2_dout),
         .i_imm          (ex.imm),
         .i_rd_din       (rd_din),
+        .i_csr_op       (ex.csr_op),
+        .i_csr_imm      (ex.csr_imm),
+        .i_csr_write    (ex.csr_write),
         .i_wb_rd        (wb.rd),
         .i_wb_reg_write (wb.reg_write),
         .o_alu_result   (alu_result),
+        .o_csr_data     (csr_data),
         .o_branch_taken (branch_taken),
         .o_pc_branch    (pc_branch),
         .o_forward_in2  (forward_in2)
@@ -244,6 +255,7 @@ module core #(
             wb.rd <= ex.rd;
             wb.imm <= ex.imm;
             wb.alu_result <= alu_result;
+            wb.csr_data <= csr_data;
             wb.reg_write <= ex.reg_write;
             wb.mem_to_reg <= ex.mem_to_reg;
             wb.d_size <= ex.d_size;
@@ -263,6 +275,7 @@ module core #(
         .i_imm          (wb.imm),
         .i_pc_plus_4    (wb.pc_plus_4),
         .i_alu_result   (wb.alu_result),
+        .i_csr_data     (wb.csr_data),
         .o_rd_din       (rd_din)
     );
 

@@ -2,6 +2,8 @@
 module core_ex_stage #(
     parameter XLEN = 32
 ) (
+    input                       i_clk,
+    input                       i_rst_n,
     input           [XLEN-1:0]  i_pc,
     input           [6:0]       i_opcode,
     input           [4:0]       i_rd,
@@ -13,9 +15,13 @@ module core_ex_stage #(
     input           [XLEN-1:0]  i_rs2_dout,
     input           [XLEN-1:0]  i_imm,
     input           [XLEN-1:0]  i_rd_din,
+    input           [1:0]       i_csr_op,
+    input                       i_csr_imm,
+    input                       i_csr_write,
     input           [4:0]       i_wb_rd,
     input                       i_wb_reg_write,
     output  logic   [XLEN-1:0]  o_alu_result,
+    output  logic   [XLEN-1:0]  o_csr_data,
     output  logic               o_branch_taken,
     output  logic   [XLEN-1:0]  o_pc_branch,
     output  logic   [XLEN-1:0]  o_forward_in2
@@ -28,6 +34,9 @@ module core_ex_stage #(
 
     logic [4:0] alu_control;
     logic       alu_zero;
+
+    logic [11:0] csr_addr;
+    logic [31:0] csr_source;
 
 
 
@@ -96,6 +105,20 @@ module core_ex_stage #(
         .o_alu_zero     (alu_zero)
     );
     
+    // cs registers
+
+    assign csr_source = (i_csr_imm) ? {27'b0, i_rs1} : forward_in1;
+
+    cs_registers csr (
+        .i_clk          (i_clk),
+        .i_rst_n        (i_rst_n),
+        .i_csr_addr     (csr_addr), 
+        .i_csr_op       (i_csr_op),
+        .i_csr_write    (i_csr_write),
+        .i_wr_data      (csr_source),  
+        .o_rd_data      (o_csr_data)
+    );
+
     // Branch unit
     branch_unit #(
         .XLEN           (XLEN)

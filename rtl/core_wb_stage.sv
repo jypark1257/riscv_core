@@ -4,11 +4,12 @@ module core_wb_stage #(
 ) (
     input           [1:0]       i_d_size,
     input                       i_d_unsigned,
-    input           [1:0]       i_mem_to_reg,
+    input           [2:0]       i_mem_to_reg,
     input           [XLEN-1:0]  i_data_rd_data,
     input           [XLEN-1:0]  i_imm,
     input           [XLEN-1:0]  i_pc_plus_4,
     input           [XLEN-1:0]  i_alu_result,
+    input           [XLEN-1:0]  i_csr_data,
     output  logic   [XLEN-1:0]  o_rd_din
 );
 
@@ -45,14 +46,16 @@ module core_wb_stage #(
 
     always @(*) begin
         case(i_mem_to_reg)
-            2'b00:
-                o_rd_din = i_alu_result;
-            2'b01:
-                o_rd_din = dmem_dout_sized;
-            2'b10: 
-                o_rd_din = i_pc_plus_4;
-            2'b11:
-                o_rd_din = i_imm;
+            3'b000:
+                o_rd_din = i_alu_result;    // alu result
+            3'b001:
+                o_rd_din = dmem_dout_sized; // memory read
+            3'b010: 
+                o_rd_din = i_pc_plus_4;     // pc + 4
+            3'b011:
+                o_rd_din = i_imm;           // immediate
+            3'b100:
+                o_rd_din = i_csr_data;
             default: 
                 o_rd_din = i_alu_result;
         endcase 
