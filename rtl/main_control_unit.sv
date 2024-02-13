@@ -12,8 +12,7 @@ module main_control_unit (
     output  logic   [1:0]   o_mem_to_reg,
     output  logic           o_mem_write,
     // CSR Eead/Write Control 
-    output  logic           o_csr_write,
-    output  logic           o_csr_read
+    output  logic           o_csr_write
 );
 
     // OPCODES 
@@ -66,7 +65,6 @@ module main_control_unit (
         o_d_unsigned = '0;
         o_mem_to_reg = '0;
         o_csr_write = '0;
-        o_csr_read = '0;
 
         case (i_opcode)
             OPCODE_R: begin
@@ -143,13 +141,13 @@ module main_control_unit (
                     FUNCT3_CSRRW: begin
                         o_csr_write = 1'b1;
                         if (i_rd != '0) begin
-                            o_csr_read = 1'b1;
+                            o_reg_write = 1'b1;
                         end else begin
-                            o_csr_read = 1'b0;
+                            o_reg_write = 1'b0;
                         end
                     end
                     FUNCT3_CSRRS: begin
-                        o_csr_read = 1'b1;
+                        o_reg_write = 1'b1;
                         if (i_rs1 != '0) begin
                             o_csr_write = 1'b1;
                         end else begin
@@ -157,7 +155,7 @@ module main_control_unit (
                         end
                     end 
                     FUNCT3_CSRRC: begin
-                        o_csr_read = 1'b1;
+                        o_reg_write = 1'b1;
                         if (i_rs1 != '0) begin
                             o_csr_write = 1'b1;
                         end else begin
@@ -167,13 +165,13 @@ module main_control_unit (
                     FUNCT3_CSRRWI: begin
                         o_csr_write = 1'b1;
                         if (i_rd != '0) begin
-                            o_csr_read = 1'b1;
+                            o_reg_write = 1'b1;
                         end else begin
-                            o_csr_read = 1'b0;
+                            o_reg_write = 1'b0;
                         end
                     end
                     FUNCT3_CSRRSI: begin
-                        o_csr_read = 1'b1;
+                        o_reg_write = 1'b1;
                         if (i_rs1 != '0) begin
                             o_csr_write = 1'b1;
                         end else begin
@@ -181,7 +179,7 @@ module main_control_unit (
                         end
                     end 
                     FUNCT3_CSRRCI: begin
-                        o_csr_read = 1'b1;
+                        o_reg_write = 1'b1;
                         if (i_rs1 != '0) begin
                             o_csr_write = 1'b1;
                         end else begin
@@ -189,7 +187,7 @@ module main_control_unit (
                         end
                     end 
                     default: begin
-                        o_csr_read = '0;
+                        o_reg_write = '0;
                         o_csr_write = '0;
                     end
                 endcase
@@ -204,7 +202,6 @@ module main_control_unit (
                 o_d_size = '0;
                 o_d_unsigned = '0;
                 o_mem_to_reg = '0;
-                o_csr_read = '0;
                 o_csr_write = '0;
             end
         endcase
