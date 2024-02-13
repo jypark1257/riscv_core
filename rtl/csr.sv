@@ -12,11 +12,11 @@ module csr (
     localparam FRM      = 12'h002;
     localparam FCSR     = 12'h003;
 
-    // Floating-Point Control and Status Register
+    /* Floating-Point Control and Status Register */
     logic [7:0] fcsr;
     logic [2:0] frm;    // rounding mode
     struct packed {
-        /*fflags*/
+        /* fflags */
         logic nv;   // Invalid Operation
         logic dz;   // Divide by zero
         logic of;   // overflow
