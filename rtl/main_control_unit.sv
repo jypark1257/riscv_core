@@ -3,6 +3,7 @@ module main_control_unit (
     input           [4:0]   i_rd,
     input           [2:0]   i_funct3,
     input           [4:0]   i_rs1,
+    input           [6:0]   i_funct7,
     // Regiser File control 
     output  logic           o_reg_write,
     // DMEM Read/Write Control
@@ -49,6 +50,9 @@ module main_control_unit (
     localparam FUNCT3_CSRRSI = 3'b110;
     localparam FUNCT3_CSRRCI = 3'b111;
 
+    // ARITHMETIC and MULTIPLIER related FUNCT7
+    localparam FUNCT7_MUL = 7'h01;
+
     // SIZES
     localparam SIZE_HALF = 2'b01;
     localparam SIZE_WORD = 2'b10;
@@ -59,6 +63,7 @@ module main_control_unit (
     localparam SRC_PC_PLUS_4 = 3'b010;
     localparam SRC_IMM = 3'b011;
     localparam SRC_CSR = 3'b100;
+    localparam SRC_MUL = 3'b101;     // data from multiplier
 
     // CSR OPERATIONS
     localparam CSR_RW = 2'b00;
@@ -81,7 +86,11 @@ module main_control_unit (
         case (i_opcode)
             OPCODE_R: begin
                 o_reg_write = 1'b1;
-                o_mem_to_reg = SRC_ALU;
+                if (i_funct7 == FUNCT7_MUL) begin   // multiplication instructions
+                    o_mem_to_reg = SRC_MUL;
+                end else begin
+                    o_mem_to_reg = SRC_ALU;         // arithmetic instructions
+                end
             end
             OPCODE_I: begin
                 o_reg_write = 1'b1;
