@@ -41,6 +41,7 @@ module core_id_stage #(
         .i_rd           (o_rd),
         .i_funct3       (o_funct3),
         .i_rs1          (o_rs1),
+        .i_funct7       (o_funct7),
         .o_mem_read     (o_mem_read),
         .o_mem_write    (o_mem_write),
         .o_reg_write    (o_reg_write),
