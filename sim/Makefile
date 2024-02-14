@@ -14,6 +14,7 @@ VERILOG_SOURCES += $(shell pwd)/../rtl/program_counter.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/main_control_unit.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/immediate_generator.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/register_file.sv
+VERILOG_SOURCES += $(shell pwd)/../rtl/cs_registers.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/branch_unit.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/forwarding_unit.sv
 VERILOG_SOURCES += $(shell pwd)/../rtl/alu_control_unit.sv

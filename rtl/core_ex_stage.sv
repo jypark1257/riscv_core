@@ -106,7 +106,7 @@ module core_ex_stage #(
     );
     
     // cs registers
-
+    assign csr_addr = {i_funct7, i_rs2};
     assign csr_source = (i_csr_imm) ? {27'b0, i_rs1} : forward_in1;
 
     cs_registers csr (

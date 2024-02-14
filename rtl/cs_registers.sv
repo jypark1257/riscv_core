@@ -36,6 +36,24 @@ module cs_registers #(
 
     assign fcsr = {frm, fflags};
 
+    /* CSR READ */ 
+    always_comb begin
+        case (i_csr_addr)
+            FFLAGS: begin
+                o_rd_data = {27'b0, fflags};
+            end
+            FRM: begin
+                o_rd_data = {29'b0, frm};
+            end 
+            FCSR: begin
+                o_rd_data = {24'b0, fcsr};
+            end
+            default: begin
+                o_rd_data = '0;
+            end
+        endcase
+    end
+
     always_comb begin
         case (i_csr_op)
             CSR_RW: begin
@@ -80,22 +98,18 @@ module cs_registers #(
         end
     end
 
-    /* CSR READ */ 
+
+    // DEBUG
+    logic [31:0] debug_fcsr;
+    logic [31:0] debug_frm;
+    logic [31:0] debug_fflags;
+
     always_comb begin
-        case (i_csr_addr)
-            FFLAGS: begin
-                o_rd_data = {27'b0, fflags};
-            end
-            FRM: begin
-                o_rd_data = {29'b0, frm};
-            end 
-            FCSR: begin
-                o_rd_data = {24'b0, fcsr};
-            end
-            default: begin
-                o_rd_data = '0;
-            end
-        endcase
+        debug_fcsr = {24'b0, fcsr};
+        debug_frm = {29'b0, frm};
+        debug_fflags = {27'b0, fflags};
     end
+
+
 
 endmodule
