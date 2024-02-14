@@ -1,6 +1,10 @@
 # 32-bit RISC-V CORE
 
-4-stage, in-order core which implements the 32-bit RISC-V instruction set. It fully implements the I extension as specified in Volume I: User-Level ISA V 2.3.
+4-stage, in-order core which implements the 32-bit RISC-V instruction set. 
+- [x] Base Instruction (RV32I)
+- [x] Zicsr Extenstion
+- [ ] F Extension (Work In Progress)
+
 
 # Quick setup
 
