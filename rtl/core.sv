@@ -34,6 +34,7 @@ typedef struct packed {
     logic   [31:0]  imm;
     logic   [31:0]  alu_result;
     logic   [31:0]  csr_data;
+    logic   [31:0]  mul_result;
     logic           reg_write;
     logic   [2:0]   mem_to_reg;
     logic   [1:0]   d_size;
@@ -93,6 +94,7 @@ module core #(
     logic [XLEN-1:0] forward_in2;
     logic [XLEN-1:0] alu_result;
     logic [XLEN-1:0] csr_data;
+    logic [XLEN-1:0] mul_result;
 
     logic [XLEN-1:0] imm;
 
@@ -233,6 +235,7 @@ module core #(
         .i_wb_reg_write (wb.reg_write),
         .o_alu_result   (alu_result),
         .o_csr_data     (csr_data),
+        .o_mul_result   (mul_result),
         .o_branch_taken (branch_taken),
         .o_pc_branch    (pc_branch),
         .o_forward_in2  (forward_in2)
@@ -256,6 +259,7 @@ module core #(
             wb.imm <= ex.imm;
             wb.alu_result <= alu_result;
             wb.csr_data <= csr_data;
+            wb.mul_result <= mul_result;
             wb.reg_write <= ex.reg_write;
             wb.mem_to_reg <= ex.mem_to_reg;
             wb.d_size <= ex.d_size;
@@ -276,6 +280,7 @@ module core #(
         .i_pc_plus_4    (wb.pc_plus_4),
         .i_alu_result   (wb.alu_result),
         .i_csr_data     (wb.csr_data),
+        .i_mul_result   (wb.mul_result),
         .o_rd_din       (rd_din)
     );
 

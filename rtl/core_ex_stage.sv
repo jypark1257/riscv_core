@@ -22,6 +22,7 @@ module core_ex_stage #(
     input                       i_wb_reg_write,
     output  logic   [XLEN-1:0]  o_alu_result,
     output  logic   [XLEN-1:0]  o_csr_data,
+    output  logic   [XLEN-1:0]  o_mul_result,
     output  logic               o_branch_taken,
     output  logic   [XLEN-1:0]  o_pc_branch,
     output  logic   [XLEN-1:0]  o_forward_in2
@@ -36,8 +37,7 @@ module core_ex_stage #(
     logic       alu_zero;
 
     logic [11:0] csr_addr;
-    logic [31:0] csr_source;
-
+    logic [XLEN-1:0] csr_source;
 
 
     // ALU control unit
@@ -117,6 +117,19 @@ module core_ex_stage #(
         .i_csr_write    (i_csr_write),
         .i_wr_data      (csr_source),  
         .o_rd_data      (o_csr_data)
+    );
+
+    // multiplier and divider
+    multiplier_unit #(
+        .XLEN(32)
+    ) m_u (
+        .i_mult_in1 (forward_in1),
+        .i_mult_in2 (o_forward_in2),
+        .i_opcode   (i_opcode),
+        .i_funct3   (i_funct3),
+        .i_funct7   (i_funct7),
+        .o_result   (o_mul_result),
+        .o_muldiv   ()
     );
 
     // Branch unit

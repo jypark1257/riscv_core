@@ -10,8 +10,16 @@ module core_wb_stage #(
     input           [XLEN-1:0]  i_pc_plus_4,
     input           [XLEN-1:0]  i_alu_result,
     input           [XLEN-1:0]  i_csr_data,
+    input           [XLEN-1:0]  i_mul_result,
     output  logic   [XLEN-1:0]  o_rd_din
 );
+    // REGISTER SOURCE
+    localparam SRC_ALU = 3'b000;
+    localparam SRC_DMEM = 3'b001;
+    localparam SRC_PC_PLUS_4 = 3'b010;
+    localparam SRC_IMM = 3'b011;
+    localparam SRC_CSR = 3'b100;
+    localparam SRC_MUL = 3'b101;     // data from multiplier
 
     logic [31:0] dmem_dout;
     logic [31:0] dmem_dout_sized;
@@ -46,16 +54,18 @@ module core_wb_stage #(
 
     always @(*) begin
         case(i_mem_to_reg)
-            3'b000:
+            SRC_ALU:
                 o_rd_din = i_alu_result;    // alu result
-            3'b001:
+            SRC_DMEM:
                 o_rd_din = dmem_dout_sized; // memory read
-            3'b010: 
+            SRC_PC_PLUS_4: 
                 o_rd_din = i_pc_plus_4;     // pc + 4
-            3'b011:
+            SRC_IMM:
                 o_rd_din = i_imm;           // immediate
-            3'b100:
+            SRC_CSR:
                 o_rd_din = i_csr_data;
+            SRC_MUL:
+                o_rd_din = i_mul_result;
             default: 
                 o_rd_din = i_alu_result;
         endcase 
