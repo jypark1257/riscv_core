@@ -3,6 +3,7 @@
 4-stage, in-order core which implements the 32-bit RISC-V instruction set. 
 - [x] Base Instruction (RV32I)
 - [x] Zicsr Extenstion
+- [ ] M Extension (Work In Progress)
 - [ ] F Extension (Work In Progress)
 
 
@@ -15,7 +16,7 @@ The following instructions will allow you to compile and run an icarus verilog m
 git clone https://github.com/jypark1257/riscv_core.git
 ```
 
-2. Install the GCC Toolchain [riscv-gnu-toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain)
+2. Install the GNU Toolchain [riscv-gnu-toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain)
 ```sh
 git clone https://github.com/riscv-collab/riscv-gnu-toolchain.git --recursive
 cd riscv-gnu-toolchain
