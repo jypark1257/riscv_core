@@ -1,7 +1,8 @@
+EXTENT := rv32ui
 SHELL := $(shell which bash) -o pipefail
-TESTS := $(notdir $(shell find riscv-tests/isa/rv32ui -type f -name "*.S"))
+TESTS := $(notdir $(shell find riscv-tests/isa/$(EXTENT) -type f -name "*.S"))
 TESTS_HEX := $(subst .S,.hex,$(TESTS))
-GCC_OPTS := -march=rv32i_zicsr_zifencei -mabi=ilp32 -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -T ../core_linker.ld -Wl,--build-id=none
+GCC_OPTS := -march=rv32im_zicsr_zifencei -mabi=ilp32 -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -T ../core_linker.ld -Wl,--build-id=none
 
 RISCV_PACKAGE := riscv64-linux-gnu
 RISCV_DEFAULT := riscv64-unknown-elf
@@ -15,7 +16,7 @@ endif
 
 all: $(TESTS_HEX)
 
-%.hex: riscv-tests/isa/rv32ui/%.S
+%.hex: riscv-tests/isa/$(EXTENT)/%.S
 	$(RISCV)-gcc $(GCC_OPTS) -Iheaders -Iriscv-tests/isa/macros/scalar $^ -o $(basename $(notdir $^)).elf
 	$(RISCV)-objdump -D -Mnumeric $(basename $(notdir $^)).elf > $(basename $@).dump
 	$(RISCV)-objcopy $(basename $@).elf -O binary $(basename $@).bin
