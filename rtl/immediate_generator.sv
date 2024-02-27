@@ -48,7 +48,7 @@ module immediate_generator (
     assign imm_i_sext = {{20{imm_i[11]}}, imm_i};
     assign imm_s_sext = {{20{imm_s[11]}}, imm_s};
     assign imm_b_sext = {{19{imm_b[12]}}, imm_b};
-    assign sht_amt_sext = {{27{sht_amt[4]}}, sht_amt};
+    assign sht_amt_sext = {{27{1'b0}}, sht_amt};
     assign imm_j_sext = {{11{imm_j[20]}}, imm_j};
     assign imm_u_zfill = {imm_u, 12'b0};
 

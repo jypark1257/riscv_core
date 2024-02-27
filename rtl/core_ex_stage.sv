@@ -92,7 +92,21 @@ module core_ex_stage #(
 
     logic [31:0] alu_in2;
 
-    assign alu_in2 = (i_opcode == OPCODE_STORE) ? i_imm : o_forward_in2;
+    always_comb begin
+        if (i_opcode == OPCODE_STORE) begin
+            alu_in2 = i_imm;
+        end else if (i_opcode == OPCODE_R) begin
+            if ((i_funct3 == 3'h1) || (i_funct3 == 3'h5)) begin
+                alu_in2 = {27'b0, o_forward_in2[4:0]};
+            end else begin
+                alu_in2 = o_forward_in2;
+            end
+        end else begin
+            alu_in2 = o_forward_in2;
+        end
+    end
+
+    //assign alu_in2 = (i_opcode == OPCODE_STORE) ? i_imm : o_forward_in2;
 
     // Arithmetic logic unit
     alu #(

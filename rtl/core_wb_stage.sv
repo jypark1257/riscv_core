@@ -32,7 +32,7 @@ module core_wb_stage #(
                 if (i_d_unsigned) begin
                     dmem_dout_sized = {24'b0, dmem_dout[7:0]};
                 end else begin
-                    dmem_dout_sized = $signed(dmem_dout << 27) >>> 27;
+                    dmem_dout_sized = $signed(dmem_dout << 24) >>> 24;
                 end
             end
             2'b01: begin    // HALF WORD

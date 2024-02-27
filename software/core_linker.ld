@@ -17,17 +17,14 @@ SECTIONS
     /* 12b signed = -2048 to +2047 */
     PROVIDE(_global_pointer = . + 0x800);
 
-    .init ORIGIN(ram) : 
+    .text.init : 
     { 
         *(.init)
     } > ram
 
-    .text (ORIGIN(ram) + 0x100) :
-    { 
-        *(.text)
-    } > ram
+    . = 0x00000400;
 
-    .data (ORIGIN(ram) + 0x400) :
+    .data :
     {
         PROVIDE(_sdata = .);
         *(.result)
