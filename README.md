@@ -3,7 +3,7 @@
 4-stage, in-order core which implements the 32-bit RISC-V instruction set. 
 - [x] Base Instruction (RV32I)
 - [x] Zicsr Extenstion
-- [ ] M Extension (Work In Progress)
+- [x] M Extension
 - [ ] F Extension (Work In Progress)
 
 
