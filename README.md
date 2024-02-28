@@ -45,7 +45,7 @@ Simulating the core is done by using cocotb based testbench `sim/test_core.py`.
 
 1. Compile your program using Makefile `software/Makefile.gcc.in`.
     * The skeleton program is included in `software/test`.
-2. Run cocotb testbench model in `sim/test_core.py`.
+2. Run cocotb testbench model in `sim/core_sim/test_core.py`.
 
 Here is how you can run the `software/test/test.c` C program with the cocotb testbench: 
 
@@ -56,7 +56,7 @@ cd software/test
 # compiled hex will be automatically initiliazed in the memory of the core
 make
 
-cd ../../sim
+cd ../../sim/core_sim
 
 # Make cocotb testbench model and generate waveform dump file
 # the fst dump file can be found in ./sim_build/core_top.fst
