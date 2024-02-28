@@ -1,4 +1,9 @@
 
 /rtl/DW_div.v
 /rtl/DW02_mult.v
-/sim/sim_build
+sim/core_sim/sim_build/
+sim/asm_sim/sim_build/
+/software/asm_tests/*.bin
+/software/asm_tests/*.dump
+/software/asm_tests/*.elf
+/software/asm_tests/*.hex
