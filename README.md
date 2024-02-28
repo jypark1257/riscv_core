@@ -39,9 +39,33 @@ make install
 sudo apt-get install make python3 python3-pip
 pip install cocotb
 ```
+
+# Running Assembly Tests
+
+Assembly tests are done by using test programs from [riscv-tests](https://github.com/riscv-software-src/riscv-tests/tree/master/isa) .
+
+1. Compile test programs using Makefile `software/asm_tests/Makefile`.
+    * To compile a specific extension test program, use the `EXTENT` variable.
+2. Run cocotb testbench model in `sim/asm_sim/test_asm.py`.
+
+Here is how you can test rv32im assembly test with the cocotb testbench: 
+
+```sh
+cd software/asm_test
+
+# Compile test programs using Makefile
+# default test extension = rv32i
+make EXTENT=rv32ui
+make EXTENT=rv32um
+
+cd ../../sim/asm_sim
+
+make
+```
+
 # Running simulations
 
-Simulating the core is done by using cocotb based testbench `sim/test_core.py`.
+Simulating the core is done by using cocotb based testbench `sim/core_sim/test_core.py`.
 
 1. Compile your program using Makefile `software/Makefile.gcc.in`.
     * The skeleton program is included in `software/test`.
