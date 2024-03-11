@@ -57,6 +57,7 @@ cd software/asm_test
 # default test extension = rv32i
 make EXTENT=rv32ui
 make EXTENT=rv32um
+make EXTENT=rv32uf
 
 cd ../../sim/asm_sim
 
