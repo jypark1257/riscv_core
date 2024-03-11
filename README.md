@@ -48,7 +48,7 @@ Assembly tests are done by using test programs from [riscv-tests](https://github
     * To compile a specific extension test program, use the `EXTENT` variable.
 2. Run cocotb testbench model in `sim/asm_sim/test_asm.py`.
 
-Here is how you can test rv32im assembly test with the cocotb testbench: 
+Here is how you can test rv32imf assembly test with the cocotb testbench: 
 
 ```sh
 cd software/asm_test
