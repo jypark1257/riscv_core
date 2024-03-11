@@ -6,8 +6,8 @@ module multiplier_unit #(
     input           [6:0]       i_opcode,
     input           [6:0]       i_funct7,
     input           [2:0]       i_funct3,
-    output reg      [XLEN-1:0]  o_result,
-    output reg                  o_muldiv    //multiply extention 인지 아닌지
+    output  logic   [XLEN-1:0]  o_result,
+    output  logic               o_muldiv    //multiply extention 인지 아닌지
 );
 
     // OPCODES
@@ -26,11 +26,11 @@ module multiplier_unit #(
     localparam FUNCT3_REM = 3'b110;
     localparam FUNCT3_REMU = 3'b111;
 
-    wire [XLEN+XLEN-1:0] mult_result_signed;
-    wire [XLEN+XLEN-1:0] mult_result_unsigned;
-    wire [XLEN+XLEN-1:0] mult_result_signed_unsigned;
-    wire [XLEN+XLEN-1:0] tc_mult_result_signed_unsigned;
-    wire [XLEN-1:0] tc_mult_in1;
+    logic [XLEN+XLEN-1:0] mult_result_signed;
+    logic [XLEN+XLEN-1:0] mult_result_unsigned;
+    logic [XLEN+XLEN-1:0] mult_result_signed_unsigned;
+    logic [XLEN+XLEN-1:0] tc_mult_result_signed_unsigned;
+    logic [XLEN-1:0] tc_mult_in1;
 
     assign tc_mult_in1 = ~i_mult_in1 + 1'b1;
     assign tc_mult_result_signed_unsigned = ~mult_result_signed_unsigned + 1'b1;
@@ -65,22 +65,19 @@ module multiplier_unit #(
         .PRODUCT        (mult_result_signed_unsigned)
     );
 
-    wire [XLEN-1:0] div_result_signed;
-    wire [XLEN-1:0] div_result_unsigned;
-    wire [XLEN-1:0] rem_result_signed;
-    wire [XLEN-1:0] rem_result_unsigned;
+    logic [XLEN-1:0] div_result_signed;
+    logic [XLEN-1:0] div_result_unsigned;
+    logic [XLEN-1:0] rem_result_signed;
+    logic [XLEN-1:0] rem_result_unsigned;
 
-    DW_div #(
+    divv #(
         .a_width        (XLEN),
-        .b_width        (XLEN),
-        .tc_mode        (1'b1),
-        .rem_mode       (1'b1)
-    ) div (
+        .b_width        (XLEN)
+    ) div_signed (
         .a              (i_mult_in1), 
         .b              (i_mult_in2), 
         .quotient       (div_result_signed), 
-        .remainder      (rem_result_signed), 
-        .divide_by_0    ()
+        .remainder      (rem_result_signed)
     );
 
     DW_div #(
@@ -96,6 +93,7 @@ module multiplier_unit #(
         .divide_by_0    ()
     );
 
+    //always_comb begin
     always @(*) begin
         if ((i_opcode == OPCODE_R) && (i_funct7 == FUNCT7_MULDIV)) begin         
             o_muldiv = 1'b1;
@@ -118,21 +116,13 @@ module multiplier_unit #(
                     o_result = mult_result_unsigned[XLEN+XLEN-1:XLEN];
                 end
                 FUNCT3_DIV: begin
-                    if ((i_mult_in1 == 32'h80000000) && (i_mult_in2 == {32{1'b1}})) begin
-                        o_result = i_mult_in1;
-                    end else begin
-                        o_result = div_result_signed;
-                    end
+                    o_result = div_result_signed;
                 end
                 FUNCT3_DIVU: begin
                     o_result = div_result_unsigned;
                 end
                 FUNCT3_REM: begin
-                    if ((i_mult_in1 == 32'h80000000) && (i_mult_in2 == {32{1'b1}})) begin
-                        o_result = 32'b0;
-                    end else begin
-                        o_result = rem_result_signed;
-                    end
+                    o_result = rem_result_signed;
                 end
                 FUNCT3_REMU: begin
                     o_result = rem_result_unsigned;

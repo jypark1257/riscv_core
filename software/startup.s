@@ -37,6 +37,9 @@ _start:
     li x30, 0
     li x31, 0
 
+    # initialize floating-point CSR
+    csrrw x0, fcsr, x0
+
     # initialize global pointer and stack pointer
     la gp, _global_pointer;
     la sp, _stack_pointer;

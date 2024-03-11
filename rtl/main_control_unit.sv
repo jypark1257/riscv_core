@@ -7,7 +7,6 @@ module main_control_unit (
     // Regiser File control 
     output  logic           o_reg_write,
     // DMEM Read/Write Control
-    output  logic           o_mem_read,
     output  logic   [1:0]   o_d_size,
     output  logic           o_d_unsigned,
     output  logic   [2:0]   o_mem_to_reg,
@@ -33,6 +32,15 @@ module main_control_unit (
     localparam OPCODE_CUSTON_2 = 7'b10_110_11;  // custom / rv128
     localparam OPCODE_CUSTON_3 = 7'b11_110_11;  // custom / rv128
 
+    // FP OPCODES
+    localparam OPCODE_FLW = 7'b00_001_11;
+    localparam OPCODE_FSW = 7'b01_001_11;
+    localparam OPCODE_FP = 7'b10_100_11;//OPCODE
+    localparam OPCODE_FMADD = 7'b1000011;
+    localparam OPCODE_FMSUB = 7'b1000111;
+    localparam OPCODE_FNMSUB = 7'b1001011;
+    localparam OPCODE_FNMADD = 7'b1001111;
+
     // SIGNED LOAD, STORE
     localparam FUNCT3_BYTE = 3'b000;
     localparam FUNCT3_HALF = 3'b001;
@@ -53,6 +61,11 @@ module main_control_unit (
     // ARITHMETIC and MULTIPLIER related FUNCT7
     localparam FUNCT7_MUL = 7'h01;
 
+    // FP related FUNCT7
+    localparam FUNCT7_FCVT_W_S = 7'b1100000;
+    localparam FUNCT7_FMV_FCLASS = 7'b1110000;
+    localparam FUNCT7_FCMP = 7'b1010000;
+
     // SIZES
     localparam SIZE_HALF = 2'b01;
     localparam SIZE_WORD = 2'b10;
@@ -64,6 +77,7 @@ module main_control_unit (
     localparam SRC_IMM = 3'b011;
     localparam SRC_CSR = 3'b100;
     localparam SRC_MUL = 3'b101;     // data from multiplier
+    localparam SRC_FPU = 3'b110;     // data from FPU
 
     // CSR OPERATIONS
     localparam CSR_RW = 2'b00;
@@ -73,7 +87,6 @@ module main_control_unit (
 
 
     always_comb begin
-        o_mem_read = '0;
         o_mem_write = '0;
         o_reg_write = '0;
         o_d_size = '0;
@@ -82,7 +95,6 @@ module main_control_unit (
         o_csr_op = '0;
         o_csr_imm = '0;
         o_csr_write = '0;
-
         case (i_opcode)
             OPCODE_R: begin
                 o_reg_write = 1'b1;
@@ -115,7 +127,6 @@ module main_control_unit (
             end
             OPCODE_LOAD: begin
                 o_reg_write = 1'b1;
-                o_mem_read = 1'b1;
                 o_mem_to_reg = SRC_DMEM;
                 case (i_funct3)
                     FUNCT3_BYTE: begin
@@ -225,11 +236,53 @@ module main_control_unit (
                     end
                 endcase
             end
+            OPCODE_FLW: begin
+                o_mem_to_reg = SRC_DMEM;
+                o_d_size = 2'b10;
+            end
+            OPCODE_FSW: begin
+                o_mem_write = 1'b1;
+                o_d_size = 2'b10;
+            end
+            OPCODE_FMADD: begin
+                o_csr_write = 1'b1;
+                o_mem_to_reg = SRC_FPU;
+            end
+            OPCODE_FMSUB: begin
+                o_csr_write = 1'b1;
+                o_mem_to_reg = SRC_FPU;
+            end
+            OPCODE_FNMSUB: begin
+                o_csr_write = 1'b1;
+                o_mem_to_reg = SRC_FPU;
+            end
+            OPCODE_FNMADD: begin
+                o_csr_write = 1'b1;
+                o_mem_to_reg = SRC_FPU;
+            end
+            OPCODE_FP: begin
+                o_csr_write = 1'b1;
+                o_reg_write = 1'b0;
+                o_mem_to_reg = SRC_FPU;
+                case (i_funct7)
+                    FUNCT7_FCVT_W_S: begin
+                        o_reg_write = 1'b1;
+                    end
+                    FUNCT7_FMV_FCLASS: begin    // FMV.X.W and FCLASS.S
+                        o_reg_write = 1'b1;
+                    end
+                    FUNCT7_FCMP: begin
+                        o_reg_write = 1'b1;
+                    end
+                    default: begin
+                        o_reg_write = 1'b0;
+                    end
+                endcase
+            end
         //  CUSTOM_INSTRUCTION: begin
         //
         //  end
             default: begin
-                o_mem_read = '0;
                 o_mem_write = '0;
                 o_reg_write = '0;
                 o_d_size = '0;

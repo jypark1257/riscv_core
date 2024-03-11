@@ -18,6 +18,10 @@ module immediate_generator (
     localparam OPCODE_AUIPC = 7'b0010111;
     localparam OPCODE_LUI = 7'b0110111;
 
+    // FP OPCODES
+    localparam OPCODE_FLW = 7'b00_001_11;
+    localparam OPCODE_FSW = 7'b01_001_11;
+
     // SHIFTS
     localparam FUNCT3_SL = 3'b001;
     localparam FUNCT3_SR = 3'b101;
@@ -29,12 +33,20 @@ module immediate_generator (
     logic [4:0]  sht_amt;   // shift amount
     logic [19:0] imm_u;     //upper immediate
 
+    // FP immediates 
+    logic [11:0] imm_flw;
+    logic [11:0] imm_fsw;
+ 
     logic [31:0] imm_i_sext;
     logic [31:0] imm_s_sext;
     logic [31:0] imm_b_sext;
     logic [31:0] sht_amt_sext;
     logic [31:0] imm_j_sext;
     logic [31:0] imm_u_zfill;
+
+    // FP sext immediate
+    logic [31:0] imm_flw_sext;
+    logic [31:0] imm_fsw_sext;
 
     // Immediate parsing
     assign imm_i = {i_funct7, i_rs2};
@@ -43,6 +55,8 @@ module immediate_generator (
     assign imm_j = {i_funct7[6], i_rs1, i_funct3, i_rs2[0], i_funct7[5:0], i_rs2[4:1], 1'b0};
     assign sht_amt = i_rs2;
     assign imm_u = {i_funct7, i_rs2, i_rs1, i_funct3};
+    assign imm_flw = {i_funct7, i_rs2};
+    assign imm_fsw = {i_funct7, i_rd};
 
     // Extension
     assign imm_i_sext = {{20{imm_i[11]}}, imm_i};
@@ -51,6 +65,8 @@ module immediate_generator (
     assign sht_amt_sext = {{27{1'b0}}, sht_amt};
     assign imm_j_sext = {{11{imm_j[20]}}, imm_j};
     assign imm_u_zfill = {imm_u, 12'b0};
+    assign imm_flw_sext = {{20{imm_flw[11]}}, imm_flw};
+    assign imm_fsw_sext = {{20{imm_fsw[11]}}, imm_fsw};
 
     always_comb begin
         o_imm = '0;
@@ -83,6 +99,12 @@ module immediate_generator (
             end
             OPCODE_LUI: begin
                 o_imm = imm_u_zfill;
+            end
+            OPCODE_FLW: begin
+                o_imm = imm_flw_sext;
+            end
+            OPCODE_FSW: begin
+                o_imm = imm_fsw_sext;
             end
             default: 
                 o_imm = '0;

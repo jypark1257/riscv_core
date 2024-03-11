@@ -2,7 +2,7 @@ EXTENT := rv32ui
 SHELL := $(shell which bash) -o pipefail
 TESTS := $(notdir $(shell find isa/$(EXTENT) -type f -name "*.S"))
 TESTS_HEX := $(subst .S,.hex,$(TESTS))
-GCC_OPTS := -march=rv32im_zicsr -mabi=ilp32 -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -T ../core_linker.ld -Wl,--build-id=none
+GCC_OPTS := -march=rv32imf_zicsr -mabi=ilp32 -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -T ../core_linker.ld -Wl,--build-id=none
 
 RISCV_PACKAGE := riscv64-linux-gnu
 RISCV_DEFAULT := riscv64-unknown-elf

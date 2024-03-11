@@ -18,6 +18,7 @@ module core_ex_stage #(
     input           [1:0]       i_csr_op,
     input                       i_csr_imm,
     input                       i_csr_write,
+    input           [4:0]       i_fflags,
     input           [4:0]       i_wb_rd,
     input                       i_wb_reg_write,
     output  logic   [XLEN-1:0]  o_alu_result,
@@ -25,13 +26,13 @@ module core_ex_stage #(
     output  logic   [XLEN-1:0]  o_mul_result,
     output  logic               o_branch_taken,
     output  logic   [XLEN-1:0]  o_pc_branch,
-    output  logic   [XLEN-1:0]  o_forward_in2
+    output  logic   [XLEN-1:0]  o_forward_in1,
+    output  logic   [XLEN-1:0]  o_forward_in2,
+    output  logic   [2:0]       o_frm
 );
 
     logic [1:0] forward_a;
     logic [1:0] forward_b;
-
-    logic [XLEN-1:0] forward_in1;
 
     logic [4:0] alu_control;
     logic       alu_zero;
@@ -66,23 +67,23 @@ module core_ex_stage #(
     // forward rs1
     // always_comb
     always @(*) begin
-        if(forward_a == 2'b10) begin   // WB STAGE
-            forward_in1 = i_rd_din;
+        if (forward_a == 2'b10) begin   // WB STAGE
+            o_forward_in1 = i_rd_din;
         end else begin
             if (i_opcode == OPCODE_AUIPC) begin
-                forward_in1 = i_pc;
+                o_forward_in1 = i_pc;
             end else begin
-                forward_in1 = i_rs1_dout;
+                o_forward_in1 = i_rs1_dout;
             end
         end
     end
 
     // forward rs2
     always @(*) begin
-        if(forward_b == 2'b10) begin   // WB STAGE
+        if (forward_b == 2'b10) begin   // WB STAGE
             o_forward_in2 = i_rd_din;
         end else begin
-            if((i_opcode == OPCODE_R) || (i_opcode == OPCODE_STORE) || (i_opcode == OPCODE_BRANCH)) begin
+            if ((i_opcode == OPCODE_R) || (i_opcode == OPCODE_STORE) || (i_opcode == OPCODE_BRANCH)) begin
                 o_forward_in2 = i_rs2_dout;
             end else begin
                 o_forward_in2 = i_imm;
@@ -92,7 +93,7 @@ module core_ex_stage #(
 
     logic [31:0] alu_in2;
 
-    always_comb begin
+    always @(*) begin
         if (i_opcode == OPCODE_STORE) begin
             alu_in2 = i_imm;
         end else if (i_opcode == OPCODE_R) begin
@@ -112,7 +113,7 @@ module core_ex_stage #(
     alu #(
         .XLEN           (XLEN)
     ) alu (
-        .i_alu_in1      (forward_in1),
+        .i_alu_in1      (o_forward_in1),
         .i_alu_in2      (alu_in2),
         .i_alu_control  (alu_control),
         .o_alu_result   (o_alu_result),
@@ -121,7 +122,7 @@ module core_ex_stage #(
     
     // cs registers
     assign csr_addr = {i_funct7, i_rs2};
-    assign csr_source = (i_csr_imm) ? {27'b0, i_rs1} : forward_in1;
+    assign csr_source = (i_csr_imm) ? {27'b0, i_rs1} : o_forward_in1;
 
     cs_registers csr (
         .i_clk          (i_clk),
@@ -129,15 +130,17 @@ module core_ex_stage #(
         .i_csr_addr     (csr_addr), 
         .i_csr_op       (i_csr_op),
         .i_csr_write    (i_csr_write),
+        .i_fflags       (i_fflags),
         .i_wr_data      (csr_source),  
-        .o_rd_data      (o_csr_data)
+        .o_rd_data      (o_csr_data),
+        .o_frm          (o_frm)
     );
 
     // multiplier and divider
     multiplier_unit #(
         .XLEN(32)
     ) m_u (
-        .i_mult_in1 (forward_in1),
+        .i_mult_in1 (o_forward_in1),
         .i_mult_in2 (o_forward_in2),
         .i_opcode   (i_opcode),
         .i_funct3   (i_funct3),
@@ -154,7 +157,7 @@ module core_ex_stage #(
         .i_funct3       (i_funct3),
         .i_alu_zero     (alu_zero),
         .i_pc           (i_pc),
-        .i_rs1_dout     (forward_in1),
+        .i_rs1_dout     (o_forward_in1),
         .i_imm          (i_imm),
         .o_branch_taken (o_branch_taken),
         .o_pc_branch    (o_pc_branch)

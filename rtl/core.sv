@@ -14,7 +14,6 @@ typedef struct packed {
     logic   [4:0]   rs2;
     logic   [6:0]   funct7;
     logic   [31:0]  imm;
-    logic           mem_read;
     logic           mem_write;
     logic           reg_write;
     logic   [2:0]   mem_to_reg;
@@ -35,7 +34,9 @@ typedef struct packed {
     logic   [31:0]  alu_result;
     logic   [31:0]  csr_data;
     logic   [31:0]  mul_result;
+    logic   [31:0]  fpu_result;
     logic           reg_write;
+    logic           fp_reg_write;
     logic   [2:0]   mem_to_reg;
     logic   [1:0]   d_size;
     logic           d_unsigned;
@@ -43,7 +44,8 @@ typedef struct packed {
 } pipe_ex_wb;
 
 module core #(
-    parameter XLEN = 32
+    parameter XLEN = 32,
+    parameter FLEN = 32
 ) (
     input                       i_clk,
     input                       i_rst_n,
@@ -61,6 +63,10 @@ module core #(
     output  logic               o_data_req,
     input                       i_data_ack
 );
+
+    // FP OPCODE
+    localparam OPCODE_FLW = 7'b0000111;
+    localparam OPCODE_FSW = 7'b0100111;
 
     // pipline registers
     pipe_if_id      id;
@@ -81,7 +87,6 @@ module core #(
     logic [4:0] rs2;
     logic [6:0] funct7;
 
-    logic mem_read;
     logic mem_write;
     logic reg_write;
     logic [2:0] mem_to_reg;
@@ -91,10 +96,16 @@ module core #(
     logic csr_imm;
     logic csr_write;
 
+    logic [XLEN-1:0] wr_data;
     logic [XLEN-1:0] forward_in2;
     logic [XLEN-1:0] alu_result;
     logic [XLEN-1:0] csr_data;
     logic [XLEN-1:0] mul_result;
+    logic [FLEN-1:0] fpu_result;
+
+    logic [2:0] frm;
+    logic [4:0] fflags;
+    logic [XLEN-1:0] int_forward_rs1;
 
     logic [XLEN-1:0] imm;
 
@@ -103,6 +114,10 @@ module core #(
 
     logic [XLEN-1:0] rd_din;
     
+    logic [FLEN-1:0] fp_wr_data;
+
+    logic fp_reg_write;
+
     logic if_flush;    
     logic id_flush;
 
@@ -163,7 +178,6 @@ module core #(
         .o_rs2          (rs2),
         .o_funct7       (funct7),
         .o_imm          (imm),
-        .o_mem_read     (mem_read),
         .o_mem_write    (mem_write),
         .o_reg_write    (reg_write),
         .o_mem_to_reg   (mem_to_reg),
@@ -177,8 +191,36 @@ module core #(
     );
 
     // --------------------------------------------------------
+
     
     assign id_flush = (branch_taken) ? 1 : 0;
+
+
+    floating_point_unit #(
+        .XLEN               (32),
+        .FLEN               (32)
+    ) fpu (
+        .i_clk              (i_clk),
+        .i_rst_n            (i_rst_n),
+        .i_id_flush         (id_flush),
+        .i_opcode           (opcode),
+        .i_wb_rd            (wb.rd),
+        .i_funct3           (funct3),
+        .i_rs1              (rs1),
+        .i_rs2              (rs2),
+        .i_funct7           (funct7),
+        .i_int_forward_rs1  (int_forward_rs1),
+        .i_fp_rd_din        (rd_din),
+        .i_wb_reg_write     (wb.reg_write),
+        .i_wb_fp_reg_write  (wb.fp_reg_write),
+        .i_frm              (frm),
+        .o_fp_forward_in2   (fp_wr_data),
+        .o_fflags           (fflags),
+        .o_fp_result        (fpu_result),
+        .o_fp_reg_write     (fp_reg_write)
+    );
+
+    // --------------------------------------------------------
 
     always_ff @(posedge i_clk or negedge i_rst_n) begin
         if (~i_rst_n) begin
@@ -195,7 +237,6 @@ module core #(
                 ex.rs2 <= rs2;
                 ex.funct7 <= funct7;
                 ex.imm <= imm;
-                ex.mem_read <= mem_read;
                 ex.mem_write <= mem_write;
                 ex.reg_write <= reg_write;
                 ex.mem_to_reg <= mem_to_reg;
@@ -231,6 +272,7 @@ module core #(
         .i_csr_op       (ex.csr_op),
         .i_csr_imm      (ex.csr_imm),
         .i_csr_write    (ex.csr_write),
+        .i_fflags       (fflags),
         .i_wb_rd        (wb.rd),
         .i_wb_reg_write (wb.reg_write),
         .o_alu_result   (alu_result),
@@ -238,12 +280,16 @@ module core #(
         .o_mul_result   (mul_result),
         .o_branch_taken (branch_taken),
         .o_pc_branch    (pc_branch),
-        .o_forward_in2  (forward_in2)
+        .o_forward_in1  (int_forward_rs1),
+        .o_forward_in2  (forward_in2),
+        .o_frm          (frm)
     );
+
+    assign wr_data = (ex.opcode == OPCODE_FSW) ? fp_wr_data : forward_in2;
 
     // data interface set
     assign o_data_addr = alu_result;
-    assign o_data_wr_data = forward_in2;
+    assign o_data_wr_data = wr_data;
     assign o_data_mask = ex.d_size;
     assign o_data_wr_en = ex.mem_write;
     assign o_data_req =  1'b1;
@@ -260,7 +306,9 @@ module core #(
             wb.alu_result <= alu_result;
             wb.csr_data <= csr_data;
             wb.mul_result <= mul_result;
+            wb.fpu_result <= fpu_result;
             wb.reg_write <= ex.reg_write;
+            wb.fp_reg_write <= fp_reg_write;
             wb.mem_to_reg <= ex.mem_to_reg;
             wb.d_size <= ex.d_size;
             wb.d_unsigned <= ex.d_unsigned;
@@ -281,6 +329,7 @@ module core #(
         .i_alu_result   (wb.alu_result),
         .i_csr_data     (wb.csr_data),
         .i_mul_result   (wb.mul_result),
+        .i_fpu_result   (wb.fpu_result),
         .o_rd_din       (rd_din)
     );
 

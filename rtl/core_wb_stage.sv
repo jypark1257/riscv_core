@@ -1,6 +1,7 @@
 
 module core_wb_stage #(
-    parameter XLEN = 32
+    parameter XLEN = 32,
+    parameter FLEN = 32
 ) (
     input           [1:0]       i_d_size,
     input                       i_d_unsigned,
@@ -11,6 +12,7 @@ module core_wb_stage #(
     input           [XLEN-1:0]  i_alu_result,
     input           [XLEN-1:0]  i_csr_data,
     input           [XLEN-1:0]  i_mul_result,
+    input           [FLEN-1:0]  i_fpu_result,
     output  logic   [XLEN-1:0]  o_rd_din
 );
     // REGISTER SOURCE
@@ -19,7 +21,8 @@ module core_wb_stage #(
     localparam SRC_PC_PLUS_4 = 3'b010;
     localparam SRC_IMM = 3'b011;
     localparam SRC_CSR = 3'b100;
-    localparam SRC_MUL = 3'b101;     // data from multiplier
+    localparam SRC_MUL = 3'b101;    // data from multiplier
+    localparam SRC_FPU = 3'b110;    // data from fpu
 
     logic [31:0] dmem_dout;
     logic [31:0] dmem_dout_sized;
@@ -66,6 +69,8 @@ module core_wb_stage #(
                 o_rd_din = i_csr_data;
             SRC_MUL:
                 o_rd_din = i_mul_result;
+            SRC_FPU:
+                o_rd_din = i_fpu_result;
             default: 
                 o_rd_din = i_alu_result;
         endcase 

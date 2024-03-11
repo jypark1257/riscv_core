@@ -25,10 +25,6 @@ module register_file #(
         end
     end
 
-    initial begin
-        rf_data[0] = '0;
-    end
-
     // output logic for rs1
     assign o_rs1_dout = (i_reg_write && (i_rs1 == i_rd)) ? i_rd_din : rf_data[i_rs1];
 

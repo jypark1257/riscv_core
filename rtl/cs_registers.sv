@@ -7,8 +7,10 @@ module cs_registers #(
     input           [11:0]      i_csr_addr,    
     input           [1:0]       i_csr_op,   
     input                       i_csr_write,
+    input           [4:0]       i_fflags,
     input           [XLEN-1:0]  i_wr_data,  // Reg[rs1] or zext(rs1)
-    output  logic   [XLEN-1:0]  o_rd_data
+    output  logic   [XLEN-1:0]  o_rd_data,
+    output          [2:0]       o_frm
 );
     // FCSR COMPONENTS
     localparam FFLAGS   = 12'h001;
@@ -78,26 +80,32 @@ module cs_registers #(
             fflags <= '0;   // default: no flags raised
         end else begin
             if (i_csr_write) begin
-                case (i_csr_addr)
-                    FFLAGS: begin
-                        fflags <= wr_data[4:0];
-                    end
-                    FRM: begin
-                        frm <= wr_data[2:0];
-                    end 
-                    FCSR: begin
-                        frm <= wr_data[7:5];
-                        fflags <= wr_data[4:0];
-                    end
-                    default: begin
-                        frm <= frm;
-                        fflags <= fflags;
-                    end
-                endcase
+                if (|i_fflags) begin
+                    frm <= frm;
+                    fflags <= fflags | i_fflags;
+                end else begin
+                    case (i_csr_addr)
+                        FFLAGS: begin
+                            fflags <= wr_data[4:0];
+                        end
+                        FRM: begin
+                            frm <= wr_data[2:0];
+                        end 
+                        FCSR: begin
+                            frm <= wr_data[7:5];
+                            fflags <= wr_data[4:0];
+                        end
+                        default: begin
+                            frm <= frm;
+                            fflags <= fflags;
+                        end
+                    endcase
+                end
             end
         end
     end
 
+    assign o_frm = frm;
 
     // DEBUG
     logic [31:0] debug_fcsr;

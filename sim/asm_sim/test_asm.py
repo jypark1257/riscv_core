@@ -1515,3 +1515,377 @@ async def rvtest_remu(dut):
         await RisingEdge(dut.i_clk)
 
     assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fadd(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fadd.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fclass(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fclass.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fcmp(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fcmp.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fcvt_w(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fcvt_w.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fcvt(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fcvt.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fdiv(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fdiv.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fmadd(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fmadd.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_fmin(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/fmin.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_ldst(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/ldst.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_move(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/ldst.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
+
+@cocotb.test()
+async def rvtest_recoding(dut):
+
+    # memory initialization
+    imem_path = "../../software/asm_tests/recoding.hex"
+    # dmem_path = "/home/pjy-wsl/rv32i/dmem.mem"
+    with open(imem_path, "r") as mem:
+        first_line = mem.readline()
+        idx  = 0
+        for line in mem:
+            inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
+            inst_decimal = int(inst, 16)
+            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 4
+
+    dut.i_rst_n.value = 0
+
+    # Create a 10ns period clock on port clk
+    clock = Clock(dut.i_clk, 10, units="ns")  
+    # Start the clock. Start it low to avoid issues on the first RisingEdge
+    cocotb.start_soon(clock.start(start_high=False))
+
+    await Timer(1, units="ns")
+    dut.i_rst_n.value = 1
+
+    for _ in range(1000):
+        
+        await RisingEdge(dut.i_clk)
+
+    assert dut.core_0.core_ID.rf.rf_data[3].value == 0xffffffff, "RVTEST_FAIL"
