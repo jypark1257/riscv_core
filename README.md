@@ -4,7 +4,7 @@
 - [x] Base Instruction (RV32I)
 - [x] Zicsr Extenstion
 - [x] M Extension
-- [ ] F Extension (Work In Progress)
+- [x] F Extension
 
 
 # Quick setup
