@@ -6,7 +6,7 @@
 - [x] M Extension
 - [x] F Extension
 
-### Schematic
+## Schematic
 <p align="center">
 <img src="./doc/top.png"/>
 
