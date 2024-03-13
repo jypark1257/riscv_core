@@ -1,6 +1,3 @@
-# Copyright (c) 2020 Sonal Pinto
-# SPDX-License-Identifier: Apache-2.0
-
 .section .init;
 .globl _start;
 _start:    
@@ -36,13 +33,10 @@ _start:
     li x29, 0
     li x30, 0
     li x31, 0
-
     # initialize floating-point CSR
     csrrw x0, fcsr, x0
-
     # initialize global pointer and stack pointer
     la gp, _global_pointer;
     la sp, _stack_pointer;
-
     # jump to main
     j main;

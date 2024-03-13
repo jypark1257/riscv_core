@@ -1,6 +1,3 @@
-/* Copyright (c) 2020 Sonal Pinto */
-/* SPDX-License-Identifier: Apache-2.0 */
-
 OUTPUT_ARCH( "riscv" )
 
 MEMORY {
@@ -8,35 +5,29 @@ MEMORY {
 }
 
 ENTRY(_start)
-
 SECTIONS
 {
     . = 0x00000000;
     /* gp is set to start of memory for gp relative addressing of static vars*/
     /* gp start is ram origin + 0x800 --- because offset for load/store is 12b */
     /* 12b signed = -2048 to +2047 */
-    PROVIDE(_global_pointer = . + 0x800);
-
     .text.init : 
     { 
         *(.init)
     } > ram
-
     . = 0x00000400;
-
     .data :
     {
+        PROVIDE(_global_pointer = . + 0x800);
         PROVIDE(_sdata = .);
         *(.result)
         *(.data)
         PROVIDE(_edata = .);
     } > ram
-
     .bss :
     {
         *(.bss)
     } > ram
-
     /* Stack Pointer - End of Memory */
     PROVIDE(_stack_pointer = ORIGIN(ram) + LENGTH(ram));
 }

@@ -16,7 +16,7 @@ CSRCS := $(wildcard *.c)
 SSRCS := $(wildcard *.s)
 LDSRC := ../core_linker.ld
 
-GCC_OPTS += -mabi=ilp32 -march=rv32im_zicsr -static -mcmodel=medany -nostartfiles -T $(LDSRC)
+GCC_OPTS += -mabi=ilp32 -march=rv32imf_zicsr -static -mcmodel=medany -nostartfiles -T $(LDSRC)
 
 default: $(TARGET).elf
 
