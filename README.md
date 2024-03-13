@@ -6,10 +6,12 @@
 - [x] M Extension
 - [x] F Extension
 
+### Schematic
+<p align="center">
 <img src="./doc/top.png"/>
 
 <img src="./doc/core.png"/>
-
+</p>
 
 # Quick setup
 
