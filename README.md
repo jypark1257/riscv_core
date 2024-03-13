@@ -6,6 +6,10 @@
 - [x] M Extension
 - [x] F Extension
 
+<img src="./doc/top.png"/>
+
+<img src="./doc/core.png"/>
+
 
 # Quick setup
 
