@@ -8,9 +8,9 @@
 
 ## Schematic
 <p align="center">
-<img src="./doc/top.png"/>
+<img src="./docs/top.png"/>
 
-<img src="./doc/core.png"/>
+<img src="./docs/core.png"/>
 </p>
 
 # Quick setup
