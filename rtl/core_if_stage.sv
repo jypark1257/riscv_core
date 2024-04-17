@@ -1,6 +1,7 @@
 
 module core_if_stage #(
-    parameter XLEN = 32
+    parameter XLEN = 32,
+    parameter RESET_PC = 32'h4000_0000
 ) (
     input                       i_clk,
     input                       i_rst_n,
@@ -22,7 +23,8 @@ module core_if_stage #(
     assign pc_next = (i_branch_taken) ? pc_branch_plus_4 : pc_plus_4;
 
     program_counter #(
-        .XLEN       (XLEN)
+        .XLEN       (XLEN),
+        .RESET_PC   (RESET_PC)
     ) pc (
         .i_clk      (i_clk),
         .i_reset_n  (i_rst_n),

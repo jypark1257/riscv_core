@@ -6,6 +6,9 @@
 - [x] M Extension
 - [x] F Extension
 
+## I/O
+- UART (115200 baud rate, 8-bit data, 1-bit stop, and no parity bit)
+
 ## Schematic
 <p align="center">
 <img src="./docs/top.png"/>
@@ -32,7 +35,7 @@ make
 
 3. Install the sifive [elf2hex](https://github.com/sifive/elf2hex.git)
 ```sh
-git clone git://github.com/sifive/elf2hex.git
+git clone https://github.com/sifive/elf2hex.git
 cd elf2hex
 autoreconf -i
 ./configure --target=riscv64-unknown-elf

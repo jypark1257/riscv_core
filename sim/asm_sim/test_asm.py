@@ -28,11 +28,16 @@ async def rvtest_add(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -64,11 +69,16 @@ async def rvtest_sub(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -100,11 +110,16 @@ async def rvtest_xor(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -134,11 +149,16 @@ async def rvtest_or(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -168,11 +188,16 @@ async def rvtest_and(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -202,11 +227,16 @@ async def rvtest_sll(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -236,11 +266,16 @@ async def rvtest_srl(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -270,11 +305,16 @@ async def rvtest_slt(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -304,11 +344,16 @@ async def rvtest_sltu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -338,11 +383,16 @@ async def rvtest_addi(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -372,11 +422,16 @@ async def rvtest_xori(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -406,11 +461,16 @@ async def rvtest_ori(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -440,11 +500,16 @@ async def rvtest_andi(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -474,11 +539,16 @@ async def rvtest_slli(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -508,11 +578,16 @@ async def rvtest_srli(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -542,11 +617,16 @@ async def rvtest_srai(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -576,11 +656,16 @@ async def rvtest_slti(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -610,11 +695,16 @@ async def rvtest_sltiu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -644,11 +734,16 @@ async def rvtest_lb(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -678,11 +773,16 @@ async def rvtest_lh(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -712,11 +812,16 @@ async def rvtest_lw(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -746,11 +851,16 @@ async def rvtest_lbu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -780,11 +890,16 @@ async def rvtest_lhu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -814,11 +929,16 @@ async def rvtest_sb(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -848,11 +968,16 @@ async def rvtest_sh(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -882,11 +1007,16 @@ async def rvtest_sw(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -916,11 +1046,16 @@ async def rvtest_beq(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -950,11 +1085,16 @@ async def rvtest_bne(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -984,11 +1124,16 @@ async def rvtest_blt(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1018,11 +1163,16 @@ async def rvtest_bge(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1052,11 +1202,16 @@ async def rvtest_bltu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1086,11 +1241,16 @@ async def rvtest_bgeu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1120,11 +1280,16 @@ async def rvtest_jal(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1154,11 +1319,16 @@ async def rvtest_jalr(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1188,11 +1358,16 @@ async def rvtest_lui(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1222,11 +1397,16 @@ async def rvtest_auipc(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1256,11 +1436,16 @@ async def rvtest_mul(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1290,11 +1475,16 @@ async def rvtest_mulh(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1324,11 +1514,16 @@ async def rvtest_mulhsu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1358,11 +1553,16 @@ async def rvtest_mulhu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1392,11 +1592,16 @@ async def rvtest_div(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1426,11 +1631,16 @@ async def rvtest_divu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1460,11 +1670,16 @@ async def rvtest_rem(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1494,11 +1709,16 @@ async def rvtest_remu(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1528,11 +1748,16 @@ async def rvtest_fadd(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1562,11 +1787,16 @@ async def rvtest_fclass(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1596,11 +1826,16 @@ async def rvtest_fcmp(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1630,11 +1865,16 @@ async def rvtest_fcvt_w(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1664,11 +1904,16 @@ async def rvtest_fcvt(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1698,11 +1943,16 @@ async def rvtest_fdiv(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1732,11 +1982,16 @@ async def rvtest_fmadd(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1766,11 +2021,16 @@ async def rvtest_fmin(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1800,11 +2060,16 @@ async def rvtest_ldst(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1834,11 +2099,16 @@ async def rvtest_move(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 
@@ -1868,11 +2138,16 @@ async def rvtest_recoding(dut):
         for line in mem:
             inst = line.strip()  # Remove leading/trailing whitespaces and newline characters
             inst_decimal = int(inst, 16)
-            dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
-            dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
-            dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
-            dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
-            idx = idx + 4
+            dut.ram_0.dp_ram_0.d0[idx].value = (inst_decimal & 0x000000ff)
+            dut.ram_0.dp_ram_0.d1[idx].value = (inst_decimal & 0x0000ff00) >> 8
+            dut.ram_0.dp_ram_0.d2[idx].value = (inst_decimal & 0x00ff0000) >> 16
+            dut.ram_0.dp_ram_0.d3[idx].value = (inst_decimal & 0xff000000) >> 24
+            idx = idx + 1
+            #dut.ram_0.dp_ram_0.mem[idx].value = (inst_decimal & 0x000000ff)
+            #dut.ram_0.dp_ram_0.mem[idx+1].value = (inst_decimal & 0x0000ff00) >> 8
+            #dut.ram_0.dp_ram_0.mem[idx+2].value = (inst_decimal & 0x00ff0000) >> 16
+            #dut.ram_0.dp_ram_0.mem[idx+3].value = (inst_decimal & 0xff000000) >> 24
+            #idx = idx + 4
 
     dut.i_rst_n.value = 0
 

@@ -1,6 +1,7 @@
 
 module program_counter #(
-    parameter XLEN = 32
+    parameter XLEN = 32,
+    parameter RESET_PC = 32'h4000_0000
 ) (
     input                       i_clk,
     input                       i_reset_n,
@@ -11,7 +12,7 @@ module program_counter #(
 
     always_ff @(posedge i_clk or negedge i_reset_n) begin
         if (~i_reset_n) begin
-            o_pc_curr <= '0;
+            o_pc_curr <= RESET_PC;
         end else begin
             if (i_pc_write) begin
                 o_pc_curr <= i_pc_next;

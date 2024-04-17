@@ -2,6 +2,7 @@ module register_file #(
     parameter XLEN = 32
 ) (
     input                       i_clk,
+    input                       i_rst_n,
     input           [4:0]       i_rs1,
     input           [4:0]       i_rs2,
     input           [4:0]       i_rd,
@@ -13,15 +14,22 @@ module register_file #(
 
     logic [XLEN-1:0] rf_data[0:31];
 
-    always_ff @(posedge i_clk) begin
-        if (i_reg_write) begin
-            if(i_rd == '0) begin
-                rf_data[i_rd] <= '0;            // hard-wired ZERO
-            end else begin
-                rf_data[i_rd] <= i_rd_din;
+    int i;
+    always_ff @(posedge i_clk or negedge i_rst_n) begin
+        if (~i_rst_n) begin
+            for (i = 0; i < 32; i = i + 1) begin
+                rf_data[i] <= '0;
             end
         end else begin
-            rf_data[i_rd] <= rf_data[i_rd];
+            if (i_reg_write) begin
+                if(i_rd == '0) begin
+                    rf_data[i_rd] <= '0;            // hard-wired ZERO
+                end else begin
+                    rf_data[i_rd] <= i_rd_din;
+                end
+            end else begin
+                rf_data[i_rd] <= rf_data[i_rd];
+            end
         end
     end
 

@@ -45,23 +45,24 @@ typedef struct packed {
 
 module core #(
     parameter XLEN = 32,
-    parameter FLEN = 32
+    parameter FLEN = 32,
+    parameter RESET_PC = 32'h4000_0000
 ) (
     input                       i_clk,
     input                       i_rst_n,
     // instruction interface
     output  logic   [XLEN-1:0]  o_instr_addr,
     input           [XLEN-1:0]  i_instr_data,
-    output  logic               o_instr_req,
-    input                       i_instr_ack,
     // data interface
     output  logic   [XLEN-1:0]  o_data_addr,
     input           [XLEN-1:0]  i_data_rd_data,
     output  logic   [XLEN-1:0]  o_data_wr_data,
     output  logic   [1:0]       o_data_mask,
     output  logic               o_data_wr_en,
-    output  logic               o_data_req,
-    input                       i_data_ack
+            // UART
+    output  logic               o_data_out_ready,
+    output  logic               o_data_in_valid,
+    output  logic   [7:0]       o_data_in
 );
 
     // FP OPCODE
@@ -102,6 +103,7 @@ module core #(
     logic [XLEN-1:0] csr_data;
     logic [XLEN-1:0] mul_result;
     logic [FLEN-1:0] fpu_result;
+    logic ex_mem_write;
 
     logic [2:0] frm;
     logic [4:0] fflags;
@@ -124,7 +126,8 @@ module core #(
     // --------------------------------------------------------
 
     core_if_stage #(
-        .XLEN(32)
+        .XLEN           (32),
+        .RESET_PC       (32'h4000_0000)
     ) core_IF (
         .i_clk          (i_clk),
         .i_rst_n        (i_rst_n),
@@ -138,10 +141,8 @@ module core #(
     // Instruction memory
     logic [XLEN-1:0] instr;
     assign o_instr_addr = (branch_taken) ? pc_branch : pc_curr;
-    assign o_instr_req = 1'b1;
     assign pc_write = 1'b1;
-    assign instr = (i_instr_ack) ? i_instr_data : '0;
-
+    assign instr = i_instr_data;
 
     // --------------------------------------------------------
 
@@ -285,14 +286,30 @@ module core #(
         .o_frm          (frm)
     );
 
+    assign ex_mem_write = ((alu_result == 32'h80000008) && (ex.opcode[6:2] == 5'b01000) && (!branch_taken)) ? 1'b0 : ex.mem_write;
+    
     assign wr_data = (ex.opcode == OPCODE_FSW) ? fp_wr_data : forward_in2;
+    
+    //UART IO    
+    logic [7:0] data_in_q;
+    logic data_in_valid_q;
+    logic data_out_ready_q;
+
+    always_ff @(posedge i_clk) begin
+        data_in_q <= ((alu_result == 32'h80000008) && (ex.opcode[6:2] == 5'b01000) && (!branch_taken)) ? wr_data[7:0] : data_in_q;
+        data_in_valid_q <= ((alu_result == 32'h80000008) && (ex.opcode[6:2] == 5'b01000) && (!branch_taken));
+        data_out_ready_q <= ((alu_result == 32'h80000004) && (ex.opcode[6:2] == 5'b00000) && (!branch_taken));
+    end
+
+    assign o_data_in = data_in_q;
+    assign o_data_in_valid = data_in_valid_q;
+    assign o_data_out_ready = data_out_ready_q;
 
     // data interface set
     assign o_data_addr = alu_result;
     assign o_data_wr_data = wr_data;
     assign o_data_mask = ex.d_size;
-    assign o_data_wr_en = ex.mem_write;
-    assign o_data_req =  1'b1;
+    assign o_data_wr_en = ex_mem_write;
 
     // --------------------------------------------------------
 

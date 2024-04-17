@@ -3,6 +3,7 @@ module core_id_stage #(
     parameter XLEN = 32
 ) (
     input                       i_clk,
+    input                       i_rst_n,
     input           [XLEN-1:0]  i_instr,
     input           [XLEN-1:0]  i_rd_din,
     input           [4:0]       i_wb_rd,
@@ -66,6 +67,7 @@ module core_id_stage #(
         .XLEN           (XLEN)
     ) rf (
         .i_clk          (i_clk),
+        .i_rst_n        (i_rst_n),
         .i_rs1          (o_rs1),
         .i_rs2          (o_rs2),
         .i_rd           (i_wb_rd),
