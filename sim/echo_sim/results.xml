@@ -1,0 +1,8 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1716626142" />
+    <testcase name="core_bench" classname="test_core" file="/home/pjy-wsl/idslab-cores/riscv_core/sim/echo_sim/test_core.py" lineno="18" time="72748.24802041054" sim_time_ns="2396150.0" ratio_time="32.937562968220575">
+      <failure message="Test failed with RANDOM_SEED=1716626142" />
+    </testcase>
+  </testsuite>
+</testsuites>

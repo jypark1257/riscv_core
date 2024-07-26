@@ -143,7 +143,7 @@ module core_top #(
         .MEM_DEPTH(4096),
         .MEM_ADDR_WIDTH(12)
     ) ram_0 (
-        .i_clk            (i_clk),
+        .i_clk           (i_clk),
 
         .i_instr_addr   (instr_addr),
         .o_instr_data   (ram_instr_data),
@@ -165,13 +165,13 @@ module core_top #(
 
         .data_in        (data_in),
         .data_in_valid  (data_in_valid),
-        .data_out_ready (data_out_ready),
-        .serial_in      (i_serial_rx),
-
         .data_in_ready  (data_in_ready),
+        .serial_out     (o_serial_tx),
+        
         .data_out       (data_out),
         .data_out_valid (data_out_valid),
-        .serial_out     (o_serial_tx)
+        .data_out_ready (data_out_ready),
+        .serial_in      (i_serial_rx)
     );
 
 

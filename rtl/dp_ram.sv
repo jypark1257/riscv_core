@@ -20,12 +20,12 @@ module dp_ram #(
     localparam SIZE_BYTE        = 2'b00;
     localparam SIZE_HALF_WORD   = 2'b01;
 
-    initial begin
-        $readmemh("/home/pjy-wsl/riscv_core/rtl/mem.hex", temp_mem);
-        for(int i = 0; i < (MEM_DEPTH>>2); i=i+1) begin 
-            {mem[(i*4)+3], mem[(i*4)+2], mem[(i*4)+1], mem[(i*4)]} = temp_mem[i];
-        end
-    end
+    //initial begin
+    //    $readmemh("/home/pjy-wsl/riscv_core/rtl/mem.hex", temp_mem);
+    //    for(int i = 0; i < (MEM_DEPTH>>2); i=i+1) begin 
+    //        {mem[(i*4)+3], mem[(i*4)+2], mem[(i*4)+1], mem[(i*4)]} = temp_mem[i];
+    //    end
+    //end
 
 
     logic [7:0] mem[MEM_DEPTH];
